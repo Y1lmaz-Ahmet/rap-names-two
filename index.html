@@ -8,8 +8,13 @@
 </head>
 <body>
 	<h1>RAP_NAMES_API</h1>
-	<input type="text">
-	<button>Give Rapper</button>
+	<form action="http://localhost:8000/api/:rappersName" method="get">
+		<input type="text" name="rappersName" placeholder="rappers name ">
+		<button type="submit">Give Rapper</button>
+	</form>
+	<form action="http://localhost:8000/api" method="get">
+		<button type="submit">fetch the current rappers</button>
+	</form>
 	<h2>Birth Name: </h2>
 	
 	<script src="./client/main.js"></script>
