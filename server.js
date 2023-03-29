@@ -1,7 +1,16 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const PORT = 8000;
 
+app.use(bodyParser.json());
+app.use(cors());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 //simple object
 const rappers = {
   "21 savage": {
@@ -25,13 +34,15 @@ const rappers = {
 app.get("/", (request, response) => {
   response.sendFile(__dirname + "/index.html");
 });
+app.get("/api", (request, response) => {
+  response.json(rappers);
+});
 
 app.get("/api/:rapperName", (request, response) => {
   const rappersName = request.params.rapperName.toLowerCase();
   rappers[rappersName]
     ? response.json(rappers[rappersName])
     : response.json(rappers["dylan"]);
-  //response.json(rappers);
 });
 
 app.listen(process.env.PORT || PORT, () => {
